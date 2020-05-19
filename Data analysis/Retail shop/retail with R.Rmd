@@ -631,9 +631,9 @@ The enterprise that we have analyzed, is a big company. Based on our findings, i
 
 This organization seems to be in an expansive phase, because even though it has losses in many of the markets that it operates, it maintains its activity on them. This is a clear behavior of businesses that are trying to increase their market share in countries where they are not yet consolidated. 
 
-This business is offering high discounts to eliminate its unwanted stocks. This kind of management is common in industries such as cloth, technology, food... or any other industry that operates with assets that need to be sold in a certain period. 
+This business is offering high discounts to eliminate its unwanted stocks. This kind of management is common in industries such as cloth, technology, food, or any other industry that operates with assets that need to be sold in a certain period. 
 
-However, this corporation also applies this philosophy to products that do not need to rotate that much, such as "Office Supplies" showing that it is a deliberate action. Furthermore, in this organization, most of the products are sold with a reduced margin. 
+However, this corporation also applies this philosophy to products that do not need to rotate that much, such as "Office Supplies", showing that it is a deliberate action. Furthermore, in this organization, most of the products are sold with a reduced margin. 
 
 It is possible to determine that the organization is applying a business strategy.
 The high rotation and low margins are key parts of a low-cost businesses’ philosophy. This behavior is specially indicated for enterprises that are expanding. 
@@ -649,13 +649,13 @@ Many of the businesses that apply this strategy use this liquidity to open new s
 
 
 The country with the greatest income is the USA. From that country, the most profitable segment is the "consumer segment". 
-The information that we have found about the is the following one: 
+The information that we have found about them is the following one: 
 
 -They buy more during the working days. The "Central" and "East" has the highest volume of consumption on "Mondays", "Thursdays" and "Fridays" and the "South" and "West" on "Tuesday", "Thursday" and "Friday".
 
--The costumers buy slightly more during the first half of the month. Furthermore, what they buy, tend to be more expensive. The price of the products of the "Machines" category, seems to be an exception, it is not influenced by when the consumer buys the product.
+-The costumers buy more during the first half of the month. Furthermore, what they buy, tend to be more expensive. The price of the products of the "Machines" category, seems to be an exception, it is not influenced by when the consumer buys the product.
 
--The region that buys the most is the "West". We have focused on which is the region that consumes the most volume of products in a single operation. The "West" is the responsible for at least 30% to 40% of orders containing from 1 product until 14. 
+-The region that buys more is the "West". We have focused on which is the region that consumes the most volume of products in a single operation. The "West" is the responsible for at least 30% to 40% of orders containing from 1 product until 14. 
 
 
 #Recommendations for the business: 
