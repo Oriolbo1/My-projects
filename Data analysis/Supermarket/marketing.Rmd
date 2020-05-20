@@ -1,7 +1,10 @@
 ---
 title: "R Notebook"
-output: html_notebook
-editor_options: 
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+editor_options:
   chunk_output_type: inline
 ---
 
@@ -227,7 +230,7 @@ The following function will determine the different quartiles. The business shou
 meltData=data.frame(meltData)
 library(dplyr)
 
-summary(A)
+
 summary(food)
 meltData%>%
   group_by(variable)%>%
@@ -339,7 +342,7 @@ I asume that complaining is the equivalent of a non-happy customer.
 With the following table, we can see that, as we expected, the clients who complained show a lower percentage of acceptance, more than 90% of then refused all the offers.
   
 ```{r}
-data$Complain
+
 prop.table(table(data$Complain,cuts$num.accepted),1)
 
 table(data$Complain,cuts$num.accepted!=0)
@@ -373,12 +376,14 @@ Even though most of the percentual differences that we can see in the following 
 
 The customers who enrolled to the company on Thursday or Friday are less likely to accept the offer. 
 
-The difference between the costumers who enrolled on Monday and those who enrolled on Thursday is more than 7%, I think is something that needs to be considered. 
+The difference between the costumers who enrolled on Monday and those who enrolled on Thursday is more than 5.55%, I think is something that needs to be considered. 
 
 ```{r}
 library(lubridate)
-data$
+library(anytime)
+
 time=data.frame("Recency"=data$Recency,"Date_customer"=data$Dt_Customer)
+time$Date_customer=anytime(time$Date_customer)
 
 daily=time%>%
   mutate(wday=wday(Date_customer,label=TRUE))
@@ -386,6 +391,7 @@ daily=time%>%
 day=factor(daily$wday,levels=c("lu","ma","mi","ju","vi","sá","do"))
 
 prop.table(table(day,cuts$num.accepted),1)
+0.833333333-0.777777778
 ```
 
 
@@ -465,7 +471,7 @@ Finally, regarding to the happiness of the costumers with the corporation, if a 
 
 Time: 
 Before finishing the conclusion, I would like to highlight two facts that, in my opinion, are important to consider. 
-According to the data, the costumers who enrolled to the company on Thursday or Friday are less likely to accept the offer. In fact, those who enroller on Monday have a probability to accept 7% higher than the costumers enrolled on Thursday.
+According to the data, the costumers who enrolled to the company on Thursday or Friday are less likely to accept the offer. In fact, those who enroller on Monday have a probability to accept 5.55% higher than the costumers enrolled on Thursday.
 
 The data also reveals that the customers are more likely to accept an offer if they are contacted during the following periods after the last time they shop from the business:
   #-From 7 days to 14

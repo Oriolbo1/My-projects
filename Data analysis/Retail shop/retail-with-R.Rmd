@@ -4,6 +4,7 @@ author: "Oriol Monjo"
 date: "19/2/2020"
 output:
   html_document: default
+  pdf_document: default
   word_document: default
 editor_options:
   chunk_output_type: inline
@@ -335,6 +336,7 @@ It makes sense, since people get paid at the beginning of the month is during th
 
 
 ```{r}
+
 compras=USA_consumer[USA_consumer$`Sub-Category`=="Envelopes"| USA_consumer$`Sub-Category`=="Copiers"|USA_consumer$`Sub-Category`=="Accessories"|USA_consumer$`Sub-Category`=="Supplies"|USA_consumer$`Sub-Category`=="Fasteners"|USA_consumer$`Sub-Category`=="Machines",c("Sub-Category","Sales","Quantity","Order_date_of_month")]
 
 compras=mutate(compras, price=Sales/Quantity)
@@ -420,7 +422,7 @@ From the data in the following table, we can determine that most of the transact
 
 ```{r}
 USA_consumer2=USA_consumer
-
+class(USA_consumer$`Order Date`)
 
 Day_con=USA_consumer2%>%
   mutate(wday=wday(`Order Date`,label=TRUE))%>%
@@ -641,9 +643,6 @@ The high rotation and low margins are key parts of a low-cost businesses’ phil
 The used strategy gives to the business a high negotiation power with their suppliers. The high volume of products the company is buying, allows it to get better prices and several days of credit. These days of credit, enables the business to sell the products before paying for them, generating a high level of liquidity. 
 
 Many of the businesses that apply this strategy use this liquidity to open new shops, and it seems to be that this corporation is also doing it. That may be the reason why it is operating in that many countries even if they are not profitable. 
-
-
-
 
 #The business wants to identify which is the country with the greatest income. From that country, the organization wants to identify the most profitable segment of costumers. Finally, it wants to obtain as much information as possible about the costumers in that segment. 
 
