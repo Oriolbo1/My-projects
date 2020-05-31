@@ -23,22 +23,16 @@ In order to analyze the data, I will use a top-down approach, starting with a ge
 During this case of study, I will provide an explanation of the most important things I see in the different plots.
 
 
-
 ```{r}
 library("readxl")
 library("ggplot2")
 data <- read_excel("Retail.xls")
-
 head(data)
-
 ```
 
-
-
-I will start taking a look at the profit that the business obtains from the different countries. In the following plot, we can see that some countries are not profitable, for example Turkey, Nigeria, Africa and Latin America, seem to obtain mixed result.
+I will start the analysis by taking a look at the profit that the business obtains from the different countries. In the following plot, we can see that some countries are not profitable, for example Turkey, Nigeria, Africa and Latin America, seem to obtain mixed result.
 
 Germany, France, United Kingdom, India and China are profitable markets. However, the most important market for this business is the USA.
-
 
 
 ```{r}
@@ -97,7 +91,6 @@ The median and the mean are similar, and the Interquartile range, in all three c
 Nonetheless, as we can see in the "Profit.Max.", the business also sells very expensive products with high margins; or, as we can see in "Profit.Min.", expensive products that had to be sold losing a lot of money.
 
 
-
 ```{r}
 ggplot(data)+
   geom_point(aes(Category,Profit,color=`Sub-Category`),shape=3)+
@@ -108,14 +101,11 @@ dim(data[data$Profit>0,])[1] #The income is positive
 
 aggregate(Profit~Category,data=data, FUN=sum)
 aggregate(Profit~Category,data=data, FUN=summary)
-
-
 ```
 
 Now, I will take a closer look to the orders that produce the greatest negative profit, -2000 $ or less. 
 
 As we can see in the plot, among these products, we can find furniture like “tables” and “chairs” or Office supplies such as “Binders” and “Appliances”. However, the most important negative income, come from the technology category were we can find sub-categories like Machines and Phones. 
-
 
 
 ```{r}
@@ -131,6 +121,7 @@ I will now create a plot that will contain all the sub-categories of the busines
 As we can see in the following plot, the sub-category “tables” is generating a huge negative profit. Considering that this sub-category has also appeared in the last plot, and thus it contains products that have a great negative impact for the business, the organization should consider if it is worth to continue selling "tables".
 
 Another conclusion that we can take out of this chart, is that the product “Machines” is profitable enough to justify the losses that the business has selling certain “Machines”. Instead of deleting this whole Sub-category, we can search for which “Machines” are making the organization to lose money and to think whether to keep them or delete them.
+
 
 ```{r}
 data_sub=aggregate(x = data$Profit, by = list(data$`Sub-Category`), FUN = "sum")
@@ -171,7 +162,6 @@ The business should seriously consider if is worth it to keep selling this line 
 data[grepl("Cubify CubeX 3D", data$`Product Name`),c(18,22)]
 ```
 
-
 If we check the information that we have of these products we find that all of them have been sold in the USA and that the only one that is profitable is from the west part of the country. 
 
 
@@ -194,7 +184,6 @@ data_USA=data[data$Market=="US",]
 ggplot()+
   geom_bar(aes(data_USA$`Order Priority`,fill=data_USA$Region))+
   labs(x = "Priority of the order",y="Frequency", fill = "Region",title="Frequency of Order Priorities by region")
-  
 ```
 
 It is possible to see in the last plot, that in all the columns, but specially on the "Medium" and "High" priority ones, the "East" and "West" Regions have a greater proportion of shipments than the "Central" and "South" part. 
@@ -204,11 +193,9 @@ I assume that this is caused because of a higher demand on the "East" and "West"
 As we can see in the following table, the "East" and "West" Regions are the ones with the highest demands.
 
 
-
 ```{r}
 table(data_USA$Region)
 ```
-
 
 Now I will analyze how the "Order Priority" is affected by the "Category" of the sent products.
 
@@ -217,8 +204,6 @@ In the following table, we will find how the percentage of the different “orde
 For example, it is possible to see that the 20% of the “Critical order priorities” that the business sends in the USA, are used for “Furniture” products, 60% for “Office Supplies” and 19% for “Technology”.
 
 It is interesting to notice that in every case, the 60% of every Order priority is used to send Office supplies.
-
-
 
 
 ```{r}
@@ -230,7 +215,6 @@ In order to understand better this data, we will use a bar plot to see if this p
 As we suspected, the Office supplies are the most sold category in the USA and, as the following plot shows, almost half of the Office Supplies aim the Consumer Market.
 
 
-
 ```{r}
 ggplot(data_USA)+
   geom_bar(aes(Category,fill=`Order Priority`))+
@@ -239,8 +223,8 @@ ggplot(data_USA)+
 
 ```
 
-
 The business wanted to know more about the segment that produces more money in the USA. That's why I will now focus on the Consumer one.
+
 
 ```{r}
 USA_consumer=data_USA[data_USA$Segment=="Consumer",]
@@ -255,7 +239,6 @@ In other words, do they buy more during the first days of the month?
 Do they buy more when the month is about to end? or there is no significant difference?
 
 
-
 ```{r}
 library(tidyverse)
 library(modelr)
@@ -267,7 +250,6 @@ USA_consumer$Order_date_str=as.character(USA_consumer$`Order Date`)
 USA_consumer$Order_date_of_month=as.integer(stri_sub(USA_consumer$Order_date_str, -2))
 
 USA_consumer$Order_date_of_month=cut(USA_consumer$Order_date_of_month, breaks=4,labels=c("1st_week","2nd_week","3rd_week","4th_week"))
-
 ```
 
 To answer the questions, I will divide the whole month in 4 equal groups. I do that because I want to know if the clients show a different behavior during any of the quarters of the months.
@@ -293,7 +275,6 @@ During the first 2 weeks, the proportion of consume is 52.93% (0.5293778), and d
 There is a difference of almost 6% between these two periods. (0.5293778-0.4706222=0.0587556)
 
 
-
 ```{r}
 prop.table(table(USA_consumer$Region,USA_consumer$Order_date_of_month),1)
 
@@ -316,7 +297,6 @@ prop.table(table(USA_consumer$`Sub-Category`
                  ,USA_consumer$Order_date_of_month),1)
 
 ```
-
 
 I will now examine these sub-categories that we have highlighted to see if there is any patter.
 
@@ -364,7 +344,8 @@ One thing that we need to consider is that there are a lot of outliers in the pl
 compras2=compras[compras$Order_date_of_month=="1st_week"|compras$Order_date_of_month=="4th_week",]
 
 ggplot(compras2)+
-  geom_boxplot(aes(Order_date_of_month,price),outlier.shape=NA, notch=TRUE)+
+  geom_violin(aes(Order_date_of_month,price))+
+  geom_boxplot(aes(Order_date_of_month,price),width=0.1,outlier.shape=NA, notch=TRUE)+
   ylim(c(0,100))+
   labs(x = "Weeks",y="Price")
 ```
@@ -398,7 +379,8 @@ filter(compras2,price>75)%>%
 
 com3=filter(compras2,price>75)
 ggplot(com3)+
-  geom_boxplot(aes(Order_date_of_month,price),notch=TRUE)+
+  geom_violin(aes(Order_date_of_month,price))+
+  geom_boxplot(aes(Order_date_of_month,price),width=0.1,notch=TRUE)+
   labs(x = "Weeks",y="Price")
 
 ```
@@ -445,7 +427,6 @@ Both days have a high demand. I would recommend the business to make sure there 
 "ju"(jueves -> Thursday) show a high activity in the "Office Supplies" department, and during "vi"(viernes -> Friday) the department that shows a higher level of sells is "furniture". Both days seem to be busy in all the departments, however the two departments that we have highlighted, should be the priority of the business.
  
 
-
 ```{r}
 prop.table(table(Day_con$wday,Day_con$Category),2)
 ```
@@ -459,7 +440,6 @@ This is what we will figure out now.
 According to the information we have in the next table, the "Central" and "East" Regions show a greatest activity during Monday, Thursday and Friday and the "South" and  "West" Regions, on Tuesday, Thursday and Friday.
 
 I would recommend taking this information into consideration when deciding the schedules of the employees.
-
 
 
 ```{r}
@@ -480,7 +460,6 @@ As we can see in the table, the "West" Region is the part of the country that co
 This could have different explanations, maybe the business was created in that region and has more presence or maybe the company policies applied in this territory have been well received by the consumers. 
 
 I don't know which is the case, however, if this high consume is due to the policies applied, then, they need to be reproduced in other Regions as well.
-
 
 
 ```{r}
@@ -534,7 +513,6 @@ table(USA_consumer[USA_consumer$Region=="Central","Discount"])
 
 ```
 
-
 Now, I want to confirm if, as we said, the discounts from 10% until 20% are aiming to motivate the sells, and those that are more than that, have the objective of selling the stocks that the consumers have not bought in the first place.
 
 To do that I will start finding the orders that had a negative profit and looking at their distribution. 
@@ -542,7 +520,6 @@ To do that I will start finding the orders that had a negative profit and lookin
 If what we said is correct, the number of orders with negative income that have a discount of 20% or less, should be reduced compared with the total of orders offered with these discounts. At the same time, the orders with more than a 20% discount, should be, for the most part, a negative-income product.
 
 As we can see in the following table, most of the orders that are not income positive, have a discount higher than 20%. However, there are 283 orders with losses that have just a 20% discount applied.
-
 
 
 ```{r}
@@ -564,16 +541,11 @@ Even though this percentages are higher than I anticipated, specially the 41.37%
 As we can see in the table, all the products offered with 32%,45%,50%,60%,70% and 80% discounts are income negative, and those offered with 30% and 40% are income negative in 91.66% and 82.22% of the cases.
 
 
-
-
-
 ```{r}
 discount=filter(USA_consumer,Discount>0)%>%
   select(Profit,Region,`Product Name`,Discount,Category)
 
 table(money_loser$Discount)/table(discount$Discount)
-
-
 ```
 
 One last detail that I would like to see is how the discounts are applied to the different Categories. 
@@ -593,8 +565,6 @@ This is not the case for Office products, but according to the data that we have
 That is showing that the business cares to ensure a rotation of its assets, even if that means to concur in extra losses.
 
 
-
-
 ```{r}
 table(discount$Category,discount$Discount)
 
@@ -612,19 +582,16 @@ As we expected, the "Central" region is the one with a greatest negative profit,
 
 Finally, if we take a look at the total profit, adding both positive and negative incomes, we can see that all the regions are profitable, but the "Central" region obtains a very low result.
  
-
-
+ 
 ```{r}
-
 aggregate(Profit~Region, data=money_loser, FUN=sum)
 
 aggregate(cbind(Profit)~Region, data=USA_consumer, FUN=sum)
-
 ```
-
 
 To conclude this case of study, I will write two different texts. 
 The first one will explain the information that we now have about the business. The second one, will be more focused on answering the questions of the business and to offer some recommendations.
+
 
 
 #About the business:
@@ -644,8 +611,9 @@ The used strategy gives to the business a high negotiation power with their supp
 
 Many of the businesses that apply this strategy use this liquidity to open new shops, and it seems to be that this corporation is also doing it. That may be the reason why it is operating in that many countries even if they are not profitable. 
 
-#The business wants to identify which is the country with the greatest income. From that country, the organization wants to identify the most profitable segment of costumers. Finally, it wants to obtain as much information as possible about the costumers in that segment. 
 
+
+#The business wants to identify which is the country with the greatest income. From that country, the organization wants to identify the most profitable segment of costumers. Finally, it wants to obtain as much information as possible about the costumers in that segment. 
 
 The country with the greatest income is the USA. From that country, the most profitable segment is the "consumer segment". 
 The information that we have found about them is the following one: 
@@ -655,6 +623,7 @@ The information that we have found about them is the following one:
 -The costumers buy more during the first half of the month. Furthermore, what they buy, tend to be more expensive. The price of the products of the "Machines" category, seems to be an exception, it is not influenced by when the consumer buys the product.
 
 -The region that buys more is the "West". We have focused on which is the region that consumes the most volume of products in a single operation. The "West" is the responsible for at least 30% to 40% of orders containing from 1 product until 14. 
+
 
 
 #Recommendations for the business: 

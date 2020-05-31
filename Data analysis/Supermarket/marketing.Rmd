@@ -28,9 +28,13 @@ This data frame has a total of 2240 registers and it has 24 NA's.
 
 Considering that the lines containing NA's represent just 1% of the information, I will delete those lines. I want to poit out that if there were not that many registers or more NA's I would have searcher for an other way to manage the missing values. 
 
+In this case, since all the NA are in the “Income” feature, another good way to manage the NA’s would be searching for the mean of incomes and substitute the NA's for the resulting number.
+
 ```{r}
 dim(data)
 length(data[is.na(data)])
+apply(data, 2, function(x) any(is.na(x)))
+nrow(data[is.na(data$Income),])
 data=data[complete.cases(data), ]
 ```
 
@@ -133,7 +137,8 @@ As we can see in the plot, the people with Basic education earns less than the c
 data$Education=factor(data$Education, levels=c("Basic","2n Cycle","Graduation","Master","PhD"))
 
 ggplot()+
-  geom_boxplot(aes(data$Education,data$Income))+
+  geom_violin(aes(data$Education,data$Income))+
+  geom_boxplot(aes(data$Education,data$Income),width =0.1)+
   coord_cartesian(ylim = c(0, 200000))+
   labs(x="Level of education", y="Income", title="Level of education vs Income")
 
