@@ -1,7 +1,7 @@
 ---
 title: "Retail Store"
 author: "Oriol Monjo"
-date: "19/2/2020"
+date: "27/7/2020"
 output:
   pdf_document: default
   html_document: default
@@ -11,7 +11,7 @@ editor_options:
 ---
 
 
-#The business wants to identify which is the country with the highest levels of income. From that country, the organization wants to identify the most profittable segment of costumers. Finally, it wants to obtain as much information as possible about the costumers in that segment. 
+The business wants to identify which is the country with the highest levels of income. From that country, the organization wants to identify the most profitable segment of costumers. Finally, it wants to obtain as much information as possible about the costumers in that segment. 
 
 
 For this analysis, the enterprise has just given us the data, without providing any context nor other information about how the comporation works. However, the questions that it asks, require a basic understanding of the business. 
@@ -72,15 +72,15 @@ ggplot(Sales2)+
 
 ```
 
-Before proceeding to focus the market of the USA, I would like to continue analyzing a little bit more the whole business. I do this because I think that this will the best way to understand how the organization works and it may be helpful when we focus on just one of the markets. 
+Before proceeding to focus on the USA market, I would like to continue analyzing a little bit more the whole business. I do this because I think that this will be the best way to understand how the organization works and it may be helpful to extract conclusions from one especific market. 
 
 We will now take a look at the different Sub-categories that this business has.
 
-The most important thing to see in the next graphic, is that I plotted the categories in the X-axis and the Profit in the Y-axis and thanks to that, we can see that this business obtains profits from a good part of the operations. However, there is a great number of orders that make the business to lose money. 
+The most important thing to see in the next graphic, is that I plotted the categories in the X-axis and the Profit in the Y-axis and thanks to that, we can see that this business obtains profits from a good part of the total operations. However, there is a great number of orders that make the business to lose money. 
 
 Specifically, 38078 orders are profitable and 12544 are income-negative.
 
-With the fist "aggregate" function, it is possible to see that adding the profitable and non profitable operations, the three categories show a positive income. 
+With the fist "aggregate" function, it is possible to see that adding the profitable and non profitable operations, the three categories of products show a positive income. 
 
 With the second "aggregate" function, we can see that the firsts quantile is negative in the "Furniture" Category and very close to 0 in the other 2 categories. That means that the business loses money or earns very little in at least 25% of the operations. 
 
@@ -105,7 +105,7 @@ aggregate(Profit~Category,data=data, FUN=summary)
 
 Now, I will take a closer look to the orders that produce the greatest negative profit, -2000 $ or less. 
 
-As we can see in the plot, among these products, we can find furniture like “tables” and “chairs” or Office supplies such as “Binders” and “Appliances”. However, the most important negative income, come from the technology category were we can find sub-categories like Machines and Phones. 
+As we can see in the plot, among these products, we can find furniture like “tables” and “chairs” or Office supplies such as “Binders” and “Appliances”. However, the most important negative income, comes from the technology category were we can find sub-categories like Machines and Phones. 
 
 
 ```{r}
@@ -118,9 +118,9 @@ ggplot(data_redu)+
 
 I will now create a plot that will contain all the sub-categories of the business, with the total profit that every sub-category has. 
 
-As we can see in the following plot, the sub-category “tables” is generating a huge negative profit. Considering that this sub-category has also appeared in the last plot, and thus it contains products that have a great negative impact for the business, the organization should consider if it is worth to continue selling "tables".
+As we can see in the following plot, the sub-category “tables” is generating a great negative profit. Considering that this sub-category contains products with an high negative-margin, the organization should consider if it is worth to continue selling "tables".
 
-Another conclusion that we can take out of this chart, is that the product “Machines” is profitable enough to justify the losses that the business has selling certain “Machines”. Instead of deleting this whole Sub-category, we can search for which “Machines” are making the organization to lose money and to think whether to keep them or delete them.
+Another conclusion that we can take out of this chart, is that the product “Machines” is profitable even if the business suffers losses selling certain “Machines”. Instead of deleting the "Machines", we can search for which “Machines” are making the organization to lose money and to think whether to keep them or delete them.
 
 
 ```{r}
@@ -135,15 +135,13 @@ ggplot(data_sub)+
   
 ```
 
-Since we have decided, not to recommend to delete the whole sub-category "Machines", but to check which are the products that have a negative impact in the profit of the business, now, we will search for them.
-
 As we can see in the following data frame, these non-profitable machines are: 
 Cubify CubeX 3D Printer Triple Head Print,
 Cubify CubeX 3D Printer Double Head Print,
 Cubify CubeX 3D Printer Double Head Print,
 Lexmark MX611dhe Monochrome Laser Printer.
 
-Considering that out of these 4 machines, 3 are "Cubify CubeX 3D", we will continue our analysis, examining the profit that we obtain from this line of products.
+Considering that out of these 4 machines, 3 are "Cubify CubeX 3D", we will continue our analysis, examining the profit that we obtained from this line of products.
 
 
 ```{r}
@@ -151,11 +149,11 @@ data[data$`Sub-Category`=="Machines" & data$Profit<=-2000,18]
 
 ```
 
-Now we will search how many products of the Cubify CubeX 3D" line the business has and their profit.
+Now we will search how many products of the "Cubify CubeX 3D" line the business has and which  profit obtains from them.
 
 As we can see, in the following data frame, there are just 4 products of this line, 3 of them are non-profitable, and just one is, however, its margin is low.
 
-The business should seriously consider if is worth it to keep selling this line of products, I recommend to delete it.
+The business should seriously consider if is worth it to keep selling this line of products, I personally recommend to delete it.
 
 
 ```{r}
@@ -170,7 +168,7 @@ data_Cubify=data.frame(data[grepl("Cubify CubeX 3D", data$`Product Name`),])
 data_Cubify["Country"]
 ```
 
-Since the 4 machines are for the USA, and as we said at the very start of this case, we need to focus on this country, we will now focus on it. 
+Since the 4 machines are for the USA, and as we said at the very beginning of this case, we need to focus on this country, we will now focus on it. 
 
 I will start the USA analysis, understanding how the business manages the costumer's orders. 
 
@@ -203,7 +201,7 @@ In the following table, we will find how the percentage of the different “orde
 
 For example, it is possible to see that the 20% of the “Critical order priorities” that the business sends in the USA, are used for “Furniture” products, 60% for “Office Supplies” and 19% for “Technology”.
 
-It is interesting to notice that in every case, the 60% of every Order priority is used to send Office supplies.
+It is interesting to notice that in every case, the 60% of every order priority is used to send Office supplies.
 
 
 ```{r}
@@ -212,7 +210,7 @@ prop.table(table(data_USA$`Order Priority`,data_USA$Category),margin=1)
 
 In order to understand better this data, we will use a bar plot to see if this percentage can be explained by the quantity of Office supplies products.
 
-As we suspected, the Office supplies are the most sold category in the USA and, as the following plot shows, almost half of the Office Supplies aim the Consumer Market.
+As we suspected, the Office supplies is the most sold category in the USA and, as the following plot shows, almost half of the Office Supplies aim the Consumer Market.
 
 
 ```{r}
@@ -223,7 +221,7 @@ ggplot(data_USA)+
 
 ```
 
-The business wanted to know more about the segment that produces more money in the USA. That's why I will now focus on the Consumer one.
+The business wants to know more about the segment that produces more money in the USA. That's why I will now focus on the Consumer one.
 
 
 ```{r}
@@ -254,7 +252,7 @@ USA_consumer$Order_date_of_month=cut(USA_consumer$Order_date_of_month, breaks=4,
 
 To answer the questions, I will divide the whole month in 4 equal groups. I do that because I want to know if the clients show a different behavior during any of the quarters of the months.
 
-Just for simplicity, I will call these quarters “weeks”, it is easier to understand. However, not all these weeks will have 7 days, some of them will have 8.
+Just for simplicity, I will call these quarters “weeks”, it is easier to understand. However, not all these "weeks" will have 7 days, some of them will have 8.
 
 That is because, the maximum number of days in a month is 31. If I divide 31/4 the result is 7.75 and thus, since the program cannot cut "3/4" of a day, it puts 8 days in some groups. 
 
@@ -263,14 +261,14 @@ When we examine the results, we should take both things into consideration.
 
 The first thing we will do with this "weeks" is to use them in a proportion table that will tell us when the USA Consumers buy more.
 
-As we can see in the first table, the percentages of orders placed, does not vary much during the months. However, considering that this is the data from a big company, 1% of sells represent a lot a money. That is why we need to investigate more the data.
+As we can see in the first table, the percentages of orders placed, does not vary much during the months. However, considering that this is the data from a big company, 1% of sells represent a lot a money. That is why we need to investigate more these findings.
 
-We can see that the "Central" Region, buys much more during the first week and that the "West" Region buys more during the second. 
-Moreover, the "East" and "South" regions show a consume of 26% during the 2 fist weeks, and during the 3rd and 4rth week the percentage decreases. 
+We can see that the "Central" Region, buys much more during the first week and that the "West" Region buys more during the second. Moreover, the "East" and "South" regions show a consume of 26% during the 2 fist weeks, and during the 3rd and 4rth week the percentage decreases. 
 
-We can then affirm that during the two first weeks of the month the consumers buy more than during the 2 last weeks. 
 
 During the first 2 weeks, the proportion of consume is 52.93% (0.5293778), and during the 2 last weeks is 47.06% (0.4706222). 
+
+We can then affirm that during the two first weeks of the month the consumers buy more than during the 2 last weeks. 
 
 There is a difference of almost 6% between these two periods. (0.5293778-0.4706222=0.0587556)
 
@@ -298,10 +296,10 @@ prop.table(table(USA_consumer$`Sub-Category`
 
 ```
 
-I will now examine these sub-categories that we have highlighted to see if there is any patter.
+I will now examine these sub-categories that we have highlighted to see if there is any pattern.
 
 In order to do that, I will first find the price of the products.
-In the data we can find information about the total Sales for a specific products and the quantity of products that contained the order. 
+In the data we can find information about the total Sales for a specific product and the quantity of products that contained the order. 
 
 So, "price" is equal to ("Total Sale"/"Total quantity bought").
 
@@ -312,7 +310,7 @@ The median in the "Machines" sub-category is in the low part of the box, that me
 
 Another interesting point that we can see, is that "Fasteners" and "Supplies" are cheap compared with the other Sub-Categories. In other words, the two categories that the customers buy the most during the last part of the month are the cheapest ones. 
 
-It makes sense, since people get paid at the beginning of the month is during this first days when they can spend the most.
+It makes sense, since people get paid at the beginning of the month, is during this first days when they can spend the most.
 
 
 ```{r}
