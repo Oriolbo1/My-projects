@@ -1,0 +1,7 @@
+The main file is the "API", once the program is running in our CMD, it allows for externall calls to be made. 
+The secondary file "Machine_learning" is a program that would be running 24 hours a day to predict, every day, which departments would need data and which data would they need. 
+The purpose of this secondary program is to retrieve data from the source before the users need the data so the process is as efficient as possible. 
+
+I hope you like this project :) 
+
+Ori
